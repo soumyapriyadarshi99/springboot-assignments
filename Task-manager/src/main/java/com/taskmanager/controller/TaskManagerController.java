@@ -17,12 +17,6 @@ public class TaskManagerController {
 
     private final TaskManagerService taskManagerService;
 
-    @GetMapping("/getDemo")
-    @ResponseStatus(HttpStatus.OK)
-    public String createDemoApiForCheck(){
-        return "Working fine";
-    }
-
     @PostMapping("/task")
     @ResponseStatus(HttpStatus.CREATED)
     public TaskResponseDto createTask(@RequestBody TaskRequestDto taskRequestDto){

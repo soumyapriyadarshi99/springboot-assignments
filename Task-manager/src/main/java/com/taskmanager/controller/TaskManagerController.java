@@ -2,11 +2,10 @@ package com.taskmanager.controller;
 
 import com.taskmanager.dto.TaskRequestDto;
 import com.taskmanager.dto.TaskResponseDto;
-import com.taskmanager.model.TaskManagerModel;
 import com.taskmanager.service.TaskManagerService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,29 @@ public class TaskManagerController {
         return "Working fine";
     }
 
-    @PostMapping("/createTask")
+    @PostMapping("/task")
     @ResponseStatus(HttpStatus.CREATED)
-    public TaskManagerModel createTask(@RequestBody TaskRequestDto taskRequestDto){
+    public TaskResponseDto createTask(@RequestBody TaskRequestDto taskRequestDto){
         return taskManagerService.createTask(taskRequestDto);
+    }
+
+    @GetMapping("/tasks")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TaskResponseDto> getAllTasks(){
+        return taskManagerService.getAllTasks();
+    }
+
+    @GetMapping("task/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TaskResponseDto getTaskById(@PathVariable Long id){
+        return taskManagerService.getTaskById(id);
+    }
+
+    @DeleteMapping("task/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity deleteTaskById(@PathVariable Long id){
+        taskManagerService.deleteTaskById(id);
+        return ResponseEntity.ok("Task With ID :"+id+" Deleted");
     }
 
 }

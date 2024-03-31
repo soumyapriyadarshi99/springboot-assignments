@@ -53,4 +53,25 @@ public class TaskManagerService {
                 throw new NotFoundException("Task not found with id: "+id);
             }
         }
+
+        public TaskResponseDto editTask(Long id,TaskRequestDto taskRequest){
+            Optional<TaskManagerModel> optionalTask=taskManagerRepository.findById(id);
+            if(optionalTask.isPresent()){
+                TaskManagerModel task=optionalTask.get();
+                if (taskRequest.getTitle() != null) {
+                    task.setTitle(taskRequest.getTitle());
+                }
+                if (taskRequest.getDescription() != null) {
+                    task.setDescription(taskRequest.getDescription());
+                }
+                if (taskRequest.getCompleted() != null) {
+                    task.setCompleted(taskRequest.getCompleted());
+                }
+                TaskResponseDto response=TaskMapper.mapToTaskResponse(taskManagerRepository.save(task)) ;
+                return response;
+            }
+            else{
+                throw new NotFoundException("Task not found with id: "+id);
+            }
+        }
 }

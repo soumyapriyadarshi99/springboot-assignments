@@ -48,4 +48,11 @@ public class TaskManagerController {
         return ResponseEntity.ok("Task With ID :"+id+" Deleted");
     }
 
+    @PutMapping("/task/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TaskResponseDto editTask(@PathVariable Long id , @RequestBody TaskRequestDto taskRequest){
+        return taskManagerService.editTask(id,taskRequest);
+    }
+
+
 }

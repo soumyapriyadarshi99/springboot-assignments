@@ -4,7 +4,6 @@ import com.taskmanager.dto.TaskResponseDto;
 import com.taskmanager.model.TaskManagerModel;
 import lombok.AllArgsConstructor;
 
-import java.util.Optional;
 
 @AllArgsConstructor
 public class TaskMapper {
